@@ -1,6 +1,6 @@
 ## Dynstr
 
-This is a dynamic string library for c, this library only does single
+This is a header only dynamic string library for c, this library only does single
 memory allocation for all strings instead of calling malloc() every time,
 
 ## How it works ?

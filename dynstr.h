@@ -1,6 +1,9 @@
+#ifndef DYNSTR_H
+#define DYNSTR_H
+
+#include <stddef.h>
 #include <string.h>
 #include <stdio.h>
-#include <stddef.h>
 #include <stdlib.h>
 #include <assert.h>
 
@@ -23,6 +26,16 @@ typedef struct {
 #ifndef STRARR_INITIAL_STR_COUNT
 #define STRARR_INITIAL_STR_COUNT 2
 #endif
+
+
+int init_strarr(strarr *arr);
+int strarr_push(strarr *arr, unsigned char* str);
+int strarr_clear(strarr *arr, int index);
+unsigned char *strarr_get(strarr *arr, int index);
+
+#endif /* DYNSTR_H */
+
+#ifdef DYNSTR_IMPLEMENTATION
 
 int init_strarr(strarr *arr)
 {
@@ -59,7 +72,7 @@ int strarr_push(strarr *arr, unsigned char* str)
 	}
 
 	int len = strlen(str);
-	len++; // \0 character
+	len++; /* \0 character */
 	if (arr->data_size >= arr->data_cap) {
 		size_t newcap = (arr->data_cap * 10) + len;
 		unsigned char *tmp = malloc(newcap);
@@ -79,6 +92,10 @@ int strarr_push(strarr *arr, unsigned char* str)
 	return 1;
 }
 
+/* It is not possible to free() a part of memory, so we are clearing it*/
+/* @Refactor: I might add an another array to this to keep track of empty
+* parts of the vecotor and loop though all of them when pushing a string to
+* see if there is any ampty space in cleared parts */
 int strarr_clear(strarr *arr, int index)
 {
 	int i = 0;
@@ -89,24 +106,10 @@ int strarr_clear(strarr *arr, int index)
 	memset(start, 0, i);
 }
 
-extern inline unsigned char *strarr_get(strarr *arr, int index)
+unsigned char *strarr_get(strarr *arr, int index)
 {
 	assert(index < arr->index);
 	return arr->data + arr->offset[index];
 }
 
-int main()
-{
-	strarr arr;
-	init_strarr(&arr);
-	strarr_push(&arr, "test");
-	strarr_push(&arr, "lolsdasdsads");
-	strarr_push(&arr, "2142121421");
-	strarr_push(&arr, "tedsadwdas");
-	strarr_clear(&arr, 2);
-	printf("%s\n", strarr_get(&arr, 0));
-	printf("%s\n", strarr_get(&arr, 1));
-	printf("%s\n", strarr_get(&arr, 2));
-	printf("%s\n", strarr_get(&arr, 3));
-	return 0;
-}
+#endif
