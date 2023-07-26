@@ -18,6 +18,8 @@ for that there is actualy two dynamic arrays used for doing single
 memory allocation. This improves it's performance and has less failure
 chance since most of the libraries call malloc() everytime.
 
+Example program can be found at /examples
+
 ## Be aware
 
 Note that this library is not finished, I did not find any implementation
