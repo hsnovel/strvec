@@ -19,13 +19,8 @@ typedef struct {
 	size_t data_size;
 } strarr;
 
-#ifndef STRARR_INITIAL_DATA_CAP
-#define STRARR_INITIAL_DATA_CAP 10
-#endif
-
-#ifndef STRARR_INITIAL_STR_COUNT
-#define STRARR_INITIAL_STR_COUNT 2
-#endif
+#define STRARR_INITIAL_DATA_CAP 255
+#define STRARR_INITIAL_STR_COUNT 16
 
 
 int init_strarr(strarr *arr);
@@ -104,6 +99,17 @@ int strarr_clear(strarr *arr, int index)
 		i++;
 	}
 	memset(start, 0, i);
+}
+
+void strarr_delete_struct(strarr* arr)
+{
+	free(arr->data);
+	free(arr->offset);
+	arr->offset_cap = 0;
+	arr->offset_size = 0;
+	arr->index = 0;
+	arr->data_cap = 0;
+	arr->data_size = 0;
 }
 
 unsigned char *strarr_get(strarr *arr, int index)
