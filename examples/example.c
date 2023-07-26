@@ -6,7 +6,7 @@
 int main()
 {
 	strarr arr;
-	init_strarr(&arr);
+	strarr_init(&arr);
 	strarr_push(&arr, "test1");
 	strarr_push(&arr, "string1");
 	strarr_push(&arr, "hellostring");

@@ -23,7 +23,7 @@ typedef struct {
 #define STRARR_INITIAL_STR_COUNT 16
 
 
-int init_strarr(strarr *arr);
+int strarr_init(strarr *arr);
 int strarr_push(strarr *arr, unsigned char* str);
 int strarr_clear(strarr *arr, int index);
 unsigned char *strarr_get(strarr *arr, int index);
@@ -32,7 +32,7 @@ unsigned char *strarr_get(strarr *arr, int index);
 
 #ifdef DYNSTR_IMPLEMENTATION
 
-int init_strarr(strarr *arr)
+int strarr_init(strarr *arr)
 {
 	arr->data = malloc(STRARR_INITIAL_DATA_CAP * sizeof(unsigned char));
 	if (arr->data == NULL)
