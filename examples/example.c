@@ -1,21 +1,21 @@
-#define DYNSTR_IMPLEMENTATION
-#include "../dynstr.h"
+#define STRVEC_IMPLEMENTATION
+#include "../strvec.h"
 #include <stdio.h>
 
 
 int main()
 {
-	strarr arr;
-	strarr_init(&arr);
-	strarr_push(&arr, "test1");
-	strarr_push(&arr, "string1");
-	strarr_push(&arr, "hellostring");
-	strarr_push(&arr, "kappa");
-	strarr_clear(&arr, 2);
-	printf("%s\n", strarr_get(&arr, 0));
-	printf("%s\n", strarr_get(&arr, 1));
-	printf("%s\n", strarr_get(&arr, 2));
-	printf("%s\n", strarr_get(&arr, 3));
+	strvec arr;
+	strvec_init(&arr);
+	strvec_push(&arr, "test1");
+	strvec_push(&arr, "string1");
+	strvec_push(&arr, "hellostring");
+	strvec_push(&arr, "kappa");
+	strvec_clear(&arr, 2);
+	printf("%s\n", strvec_get(&arr, 0));
+	printf("%s\n", strvec_get(&arr, 1));
+	printf("%s\n", strvec_get(&arr, 2));
+	printf("%s\n", strvec_get(&arr, 3));
 
 	/* This is how you should NOT use the next function,
 	*  the os will clear the memory after you exit the
@@ -24,6 +24,6 @@ int main()
 	*  generate a string in the middle of the program
 	*  and need to delete, do not use this before exiting
 	*  the program it is unnecesarry. */
-	strarr_delete_struct(&arr);
+	strvec_delete_struct(&arr);
 	return 0;
 }
