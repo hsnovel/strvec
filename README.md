@@ -1,3 +1,4 @@
+# [THIS PROJECT MOVED TO STD](https://github.com/xcatalyst/std)
 ## Strvec
 
 This is a header only string vector library for c, this library only does single
